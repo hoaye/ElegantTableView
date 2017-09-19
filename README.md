@@ -5,7 +5,7 @@ ElegantTableView
 
 1. Add ElegantTableView to your Cartfile. </br>
 ```bash
-    github "YJManager/ElegantTableView"
+    github "stackhou/ElegantTableView"
 ```
 2. Run 
 ```bash
