@@ -3,12 +3,10 @@
 //  ElegantTableViewDemo
 //
 //  Created by YJHou on 2017/7/3.
-//  Copyright © 2017年 侯跃军. All rights reserved.
-//  一个实例方法 创建简单的 TableView
+//  Copyright © 2017年 houmanager. All rights reserved.
+//  优雅的 创建简单的 TableView
 
-/** 
-    版本号: 0.0.1
- */
+/** 当前版本: 0.0.2 */
 
 #import <UIKit/UIKit.h>
 
@@ -21,11 +19,11 @@ typedef void(^didScrollHandleBlock)(UIScrollView *tableView, CGPoint contentOffs
 + (ElegantTableViewGenerator *)shareInstance;
 
 /** 创建tableView */
-- (UITableView *)createTableViewWithTitles:(NSArray *)titles
-                                 subTitles:(NSArray *)subTitles
-                                 rowHeight:(CGFloat)rowHeight
-                                 superView:(UIView *)superView
-                         didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
-                            didScrollBlock:(didScrollHandleBlock)didScrollBlock;
+- (UITableView *)createWithFrame:(CGRect)frame
+                          titles:(NSArray *)titles
+                       subTitles:(NSArray *)subTitles
+                       rowHeight:(CGFloat)rowHeight
+               didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
+                  didScrollBlock:(didScrollHandleBlock)didScrollBlock;
 
 @end

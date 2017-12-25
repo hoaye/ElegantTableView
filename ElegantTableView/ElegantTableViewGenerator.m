@@ -3,7 +3,7 @@
 //  ElegantTableViewDemo
 //
 //  Created by YJHou on 2017/7/3.
-//  Copyright © 2017年 侯跃军. All rights reserved.
+//  Copyright © 2017年 houmanager. All rights reserved.
 //
 
 #import "ElegantTableViewGenerator.h"
@@ -28,24 +28,26 @@
     return _instance;
 }
 
-- (UITableView *)createTableViewWithTitles:(NSArray *)titles
-                                 subTitles:(NSArray *)subTitles
-                                 rowHeight:(CGFloat)rowHeight
-                                 superView:(UIView *)superView
-                         didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
-                            didScrollBlock:(didScrollHandleBlock)didScrollBlock{
+- (UITableView *)createWithFrame:(CGRect)frame
+                          titles:(NSArray *)titles
+                       subTitles:(NSArray *)subTitles
+                       rowHeight:(CGFloat)rowHeight
+               didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
+                  didScrollBlock:(didScrollHandleBlock)didScrollBlock{
     
     self.titles = [NSMutableArray arrayWithArray:titles];
     self.subTitles = [NSMutableArray arrayWithArray:subTitles];
     self.didselectRowBlock = didSelectRowBlock;
     self.didScrollBlock = didScrollBlock;
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:superView.bounds style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = rowHeight;
     tableView.tableFooterView = [UIView new];
-    [superView addSubview:tableView];
+    
+    tableView.estimatedSectionHeaderHeight = tableView.estimatedSectionFooterHeight = tableView.estimatedRowHeight = 0.0f;
+    
     return tableView;
 }
 
@@ -103,6 +105,5 @@
     }
     return _subTitles;
 }
-
 
 @end

@@ -19,14 +19,14 @@
     [super viewDidLoad];
     
     
-    NSArray *dataSources = @[@"我的", @"你的", @"大家的"];
-    
-    [[ElegantTableViewGenerator shareInstance] createTableViewWithTitles:dataSources subTitles:nil rowHeight:44 superView:self.view didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
-        NSLog(@"-->%ld", (long)indexPath.row);
+    NSArray *dataSources = @[@"你", @"我", @"他", @"1", @"2", @"3"];
+    UITableView *tableView = [[ElegantTableViewGenerator shareInstance] createWithFrame:self.view.bounds titles:dataSources subTitles:nil rowHeight:44 didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
+        NSLog(@"点击TableView-->%ld", (long)indexPath.row);
     } didScrollBlock:^(UIScrollView *tableView, CGPoint contentOffset) {
-        NSLog(@"-->%@", NSStringFromCGPoint(contentOffset));
+        NSLog(@"滚动TableView-->%@", NSStringFromCGPoint(contentOffset));
     }];
     
+    [self.view addSubview:tableView];
 }
 
 
