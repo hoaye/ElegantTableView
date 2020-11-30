@@ -19,36 +19,30 @@
 
 @implementation ElegantTableViewGenerator
 
-+ (ElegantTableViewGenerator *)shareInstance{
-    static ElegantTableViewGenerator *_instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _instance = [[ElegantTableViewGenerator alloc] init];
-    });
-    return _instance;
-}
-
-- (UITableView *)createWithFrame:(CGRect)frame
++ (ElegantTableViewGenerator *)createWithFrame:(CGRect)frame
                           titles:(NSArray *)titles
                        subTitles:(NSArray *)subTitles
                        rowHeight:(CGFloat)rowHeight
                didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
-                  didScrollBlock:(didScrollHandleBlock)didScrollBlock{
+                  didScrollBlock:(didScrollHandleBlock)didScrollBlock {
     
-    self.titles = [NSMutableArray arrayWithArray:titles];
-    self.subTitles = [NSMutableArray arrayWithArray:subTitles];
-    self.didselectRowBlock = didSelectRowBlock;
-    self.didScrollBlock = didScrollBlock;
+    ElegantTableViewGenerator *tableViewGenerator = [[ElegantTableViewGenerator alloc] init];
+    
+    tableViewGenerator.titles = [NSMutableArray arrayWithArray:titles];
+    tableViewGenerator.subTitles = [NSMutableArray arrayWithArray:subTitles];
+    tableViewGenerator.didselectRowBlock = didSelectRowBlock;
+    tableViewGenerator.didScrollBlock = didScrollBlock;
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
+    tableView.delegate = tableViewGenerator;
+    tableView.dataSource = tableViewGenerator;
     tableView.rowHeight = rowHeight;
     tableView.tableFooterView = [UIView new];
     
     tableView.estimatedSectionHeaderHeight = tableView.estimatedSectionFooterHeight = tableView.estimatedRowHeight = 0.0f;
+    tableViewGenerator.tableView = tableView;
     
-    return tableView;
+    return tableViewGenerator;
 }
 
 #pragma mark - UITableViewDataSource
@@ -104,6 +98,10 @@
         _subTitles = [NSMutableArray array];
     }
     return _subTitles;
+}
+
+- (void)dealloc {
+//    NSLog(@"-->%s", __func__);
 }
 
 @end

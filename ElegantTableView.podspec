@@ -1,4 +1,4 @@
-version = "0.0.3";
+version = "0.0.4";
 
 Pod::Spec.new do |s|
 
@@ -17,4 +17,3 @@ Pod::Spec.new do |s|
     s.requires_arc = true
 
 end
-
